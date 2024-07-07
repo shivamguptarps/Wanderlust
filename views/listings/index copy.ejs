@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listings</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            text-align: center;
+            background-color: #294356;
+        }
+        .containering{
+            display: flex;
+            flex-wrap: wrap;
+            /* justify-content:center;
+            align-items: center; */
+            width: 100%;
+        }
+        .card{
+            height: 400px;
+            width:31%;
+            background-color: rgba(244, 245, 218, 0.822);
+            display: flex;
+            margin: 1%;
+            flex-direction: column;
+            border-radius: 10px;
+            
+        }
+        img{
+            height:70%;
+            filter:brightness(80%)
+            /* width: 100%; */
+            
+        }
+        .card>h3{
+            padding: 10px;
+        }
+       
+    </style>
+</head>
+<body>
+    <h1>All Listings</h2>
+    <form action="/listings/new" method="get">
+        <button>Create new post</button>
+    </form>
+    <div class="containering">
+       
+   <% for (let listings of allListings){ %>
+        <div class="card">
+           <h3> <a href="/listings/<%=listings._id%>"> <%= listings.title %> </a> </h4>
+          
+           <img src="<%= listings.image %>" alt="N/A">
+        </div>
+   <% } %>
+</div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<% layout("/layouts/boilerplate")%>
+  <style>
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #map {
+      height: 400px;
+      width: 80%;
+    }
+  </style>
+
+<script>
+  let mapToken = "<%=process.env.MAP_TOKEN%>";
+  let coordinates = "<%- JSON.stringify(info.geometry.coordinates)%>";
+  let title = "<%=info.title%>";
+</script>
+
+  <div class="outer-show-div">
+    <div class="card show-card">
+      <div class="row g-3">
+        <div class="col-md show-img-div">
+          <img src="<%=info.image.url%>" class="img-fluid rounded-start" alt="listing_image">
+        </div>
+        <div class="col-md">
+          <div class="card-body">
+            <i>
+              <p class="card-text">Owned By : <%= info.owner.username %>
+              </p>
+            </i>
+            <h5 class="card-title">
+              <%= info.title %>
+            </h5>
+            <p class="card-text">
+              <%= info.description %>
+            </p>
+            <p class="card-text">
+              <%= info.location %>
+            </p>
+            <p class="card-text">
+              <%= info.country %>
+            </p>
+            <p class="card-text"> &#8377; <%= info.price.toLocaleString("en-IN") %>
+            </p>
+            <% if(currUser && (currUser._id).equals(info.owner._id)) {%>
+              <div class="show-btns">
+                <div class="show-btn-edit">
+                  <a class="btn btn-outline-dark" href="/listings/<%=info._id%>/edit">Edit</a>
+                </div>
+                <div class="show-btn-delete">
+                  <form method="post" action="/listings/<%=info._id%>?_method=DELETE">
+                    <button class="btn btn-outline-dark">Delete</button>
+                  </form>
+                </div>
+              </div>
+              <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+
+    <div>
+      <%- include("../includes/review.ejs") %>
+    </div>
+
+    <div class="mt-3">
+      <h4>Where you will be</h4>
+      <div style="margin: auto;" id="map">
+
+      </div>
+    </div>
+
+  </div>
+  
+  <script src="/js/map.js"></script>

@@ -1,0 +1,39 @@
+<% layout("/layouts/boilerplate")%>
+<div class="row " id="form-upper" >    
+    <div class="col-8 offset-2">  
+    <h3>Fill Out Details Which you want to edit</h3>
+    <form action="/listings/<%=listing._id%>?_method=PUT" enctype="multipart/form-data" method="post" novalidate class="needs-validation">
+        <div class="mb-3">
+            <label for="title">Title</label>
+            <input name="listing[title]" value="<%=listing.title%>" type="text" class="form-control" id="title" placeholder="Enter Title" required>
+        </div>
+        <div class="mb-3">
+            <label for="description">Description</label>
+            <textarea name="listing[description]" value="<%=listing.description%>" class="form-control" id="description" placeholder="Enter Description" required><%=listing.description%></textarea>
+        </div>
+        <div class="mb-3">
+            Original Listing Image <br>
+            <img src="<%=originalImageUrl%>" alt="originalListingImage">
+        </div>
+        <div class="mb-3">
+            <label for="image">Image</label>
+            <input name="listing[image]" type="file" class="form-control" id="image">
+        </div>
+        <div class="row">
+        <div class="mb-3 col-md-4">
+            <label for="price">Price</label>
+            <input type="number" value="<%=listing.price%>" name="listing[price]" class="form-control" id="price" placeholder="Enter Price" required>
+        </div>
+        <div class="mb-3 col-md-8">
+            <label for="country">Country</label>
+            <input name="listing[country]" value="<%=listing.country%>" type="text" class="form-control" id="country" placeholder="Enter Country" required>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="location">Location</label>
+        <input name="listing[location]" value="<%=listing.location%>" type="text" class="form-control" id="location" placeholder="Enter Location" required>
+    </div>
+    <button class="btn btn-outline-dark btn-sm">Submit</button>
+    </form>
+</div>
+</div>
